@@ -44,3 +44,7 @@ a:hover {
 a:active {
   text-decoration: none;
 }
+
+.left-align {
+  text-align: left;
+}
