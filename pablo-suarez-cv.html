@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pablo Suarez Petrillo | Coach de Softball</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy-dark: #0a1628;
+            --navy-mid: #152238;
+            --navy-light: #1e3a5f;
+            --gold: #d4a84b;
+            --gold-light: #f0c966;
+            --cream: #f5f0e8;
+            --white: #ffffff;
+            --text-muted: #8a9bb5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Source Sans 3', sans-serif;
+            background: var(--navy-dark);
+            color: var(--cream);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Background Pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at 20% 0%, rgba(212, 168, 75, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 100%, rgba(30, 58, 95, 0.4) 0%, transparent 50%),
+                repeating-linear-gradient(
+                    135deg,
+                    transparent,
+                    transparent 50px,
+                    rgba(255,255,255,0.01) 50px,
+                    rgba(255,255,255,0.01) 51px
+                );
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Header / Hero */
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            position: relative;
+        }
+
+        .hero-image {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--navy-dark));
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            filter: grayscale(20%) contrast(1.1);
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 4rem;
+            position: relative;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(212, 168, 75, 0.15);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 0.5rem 1rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+            width: fit-content;
+            animation: slideIn 0.8s ease-out;
+        }
+
+        .hero-badge::before {
+            content: '🥎';
+        }
+
+        h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(4rem, 10vw, 8rem);
+            line-height: 0.9;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            animation: fadeUp 1s ease-out 0.2s both;
+        }
+
+        h1 span {
+            display: block;
+            color: var(--gold);
+        }
+
+        .tagline {
+            font-size: 1.25rem;
+            font-weight: 300;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            max-width: 500px;
+            animation: fadeUp 1s ease-out 0.4s both;
+        }
+
+        .contact-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            animation: fadeUp 1s ease-out 0.6s both;
+        }
+
+        .contact-bar a {
+            color: var(--cream);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-bar a:hover {
+            color: var(--gold);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator::after {
+            content: '';
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--gold), transparent);
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            background: var(--navy-mid);
+            border-top: 1px solid rgba(212, 168, 75, 0.2);
+            border-bottom: 1px solid rgba(212, 168, 75, 0.2);
+        }
+
+        .stat {
+            padding: 2rem;
+            text-align: center;
+            border-right: 1px solid rgba(212, 168, 75, 0.1);
+            transition: background 0.3s;
+        }
+
+        .stat:last-child {
+            border-right: none;
+        }
+
+        .stat:hover {
+            background: rgba(212, 168, 75, 0.05);
+        }
+
+        .stat-number {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            color: var(--gold);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+        }
+
+        section {
+            margin-bottom: 6rem;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .section-number {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            opacity: 0.5;
+        }
+
+        h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+        }
+
+        .section-line {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, var(--gold), transparent);
+        }
+
+        /* Mission Statement */
+        .mission {
+            background: var(--navy-mid);
+            padding: 3rem;
+            border-left: 4px solid var(--gold);
+            font-size: 1.1rem;
+            font-weight: 300;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .mission::before {
+            content: '"';
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 8rem;
+            color: var(--gold);
+            opacity: 0.2;
+            position: absolute;
+            top: -1rem;
+            left: 1rem;
+            line-height: 1;
+        }
+
+        .mission strong {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        /* Timeline */
+        .results-layout {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .trophy-highlight {
+            position: sticky;
+            top: 2rem;
+            background: var(--navy-mid);
+            overflow: hidden;
+        }
+
+        .trophy-highlight img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: contrast(1.05);
+        }
+
+        .trophy-caption {
+            padding: 1rem;
+            text-align: center;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            color: var(--navy-dark);
+        }
+
+        .trophy-year {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            display: block;
+        }
+
+        .trophy-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--gold), var(--navy-light));
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 3rem;
+            opacity: 0;
+            transform: translateX(-20px);
+            animation: slideIn 0.6s ease-out forwards;
+        }
+
+        .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.3s; }
+        .timeline-item:nth-child(4) { animation-delay: 0.4s; }
+        .timeline-item:nth-child(5) { animation-delay: 0.5s; }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -3rem;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            background: var(--gold);
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px var(--navy-dark), 0 0 20px rgba(212, 168, 75, 0.3);
+        }
+
+        .timeline-item.current::before {
+            animation: pulse 2s infinite;
+        }
+
+        .timeline-year {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-role {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-achievements {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .achievement {
+            background: rgba(212, 168, 75, 0.1);
+            border: 1px solid rgba(212, 168, 75, 0.3);
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .achievement.gold::before { content: '🥇'; }
+        .achievement.silver::before { content: '🥈'; }
+        .achievement.bronze::before { content: '🥉'; }
+        .achievement.semifinal::before { content: '⚡'; }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background: var(--navy-mid);
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+        }
+
+        .skill-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-card h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.3rem;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            color: var(--gold);
+        }
+
+        .skill-card ul {
+            list-style: none;
+        }
+
+        .skill-card li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .skill-card li:last-child {
+            border-bottom: none;
+        }
+
+        /* Languages */
+        .languages {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .language {
+            text-align: center;
+            padding: 2rem;
+            background: var(--navy-mid);
+            min-width: 150px;
+        }
+
+        .language-flag {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .language-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+        }
+
+        .language-level {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* References */
+        .references-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .reference-card {
+            background: var(--navy-mid);
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .reference-card:hover {
+            transform: scale(1.02);
+        }
+
+        .reference-avatar {
+            width: 60px;
+            height: 60px;
+            background: var(--navy-light);
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+        }
+
+        .reference-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .reference-role {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .reference-contact {
+            font-size: 0.8rem;
+            color: var(--gold);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--navy-mid);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(212, 168, 75, 0.2);
+        }
+
+        .footer-location {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-location::before {
+            content: '📍';
+        }
+
+        .footer-cta {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            letter-spacing: 2px;
+        }
+
+        .footer-email {
+            margin-top: 1rem;
+        }
+
+        .footer-email a {
+            color: var(--cream);
+            text-decoration: none;
+            padding: 0.75rem 2rem;
+            border: 1px solid var(--gold);
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .footer-email a:hover {
+            background: var(--gold);
+            color: var(--navy-dark);
+        }
+
+        /* Animations */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 4px var(--navy-dark), 0 0 20px rgba(212, 168, 75, 0.3); }
+            50% { box-shadow: 0 0 0 8px var(--navy-dark), 0 0 30px rgba(212, 168, 75, 0.5); }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero {
+                grid-template-columns: 1fr;
+                min-height: auto;
+            }
+
+            .hero-image {
+                height: 50vh;
+            }
+
+            .hero-image::after {
+                display: none;
+            }
+
+            .stats-bar {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .skills-grid,
+            .references-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .results-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .trophy-highlight {
+                position: relative;
+                max-width: 300px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content {
+                padding: 2rem;
+            }
+
+            h1 {
+                font-size: 3.5rem;
+            }
+
+            .stats-bar {
+                grid-template-columns: 1fr;
+            }
+
+            .stat {
+                border-right: none;
+                border-bottom: 1px solid rgba(212, 168, 75, 0.1);
+            }
+
+            .contact-bar {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="hero-image">
+            <img src="WhatsApp_Image_2025-11-30_at_13_41_00.jpeg" alt="Pablo Suarez - Softball Coach" />
+        </div>
+        <div class="hero-content">
+            <div class="hero-badge">Manager & Coach</div>
+            <h1>PABLO<span>SUAREZ PETRILLO</span></h1>
+            <p class="tagline">Especialista en el desarrollo del softball juvenil y profesional con más de 6 años de experiencia en el panorama italiano.</p>
+            <div class="contact-bar">
+                <span>📍 Pianoro (BO), Italia</span>
+                <a href="tel:+393923506797">📞 +39 392 350 6797</a>
+                <a href="/cdn-cgi/l/email-protection#44342526282b04342526282b37312536213e6a2921">✉️ <span class="__cf_email__" data-cfemail="e19180838d8ea19180838d8e92948093849bcf8c84">[email&#160;protected]</span></a>
+            </div>
+            <div class="scroll-indicator">Descubrir más</div>
+        </div>
+    </section>
+
+    <div class="stats-bar">
+        <div class="stat">
+            <div class="stat-number">6+</div>
+            <div class="stat-label">Años de Experiencia</div>
+        </div>
+        <div class="stat">
+            <div class="stat-number">3</div>
+            <div class="stat-label">Títulos Nacionales</div>
+        </div>
+        <div class="stat">
+            <div class="stat-number">3</div>
+            <div class="stat-label">Idiomas</div>
+        </div>
+        <div class="stat">
+            <div class="stat-number">2</div>
+            <div class="stat-label">Países</div>
+        </div>
+    </div>
+
+    <main>
+        <section>
+            <div class="section-header">
+                <span class="section-number">01</span>
+                <h2>MI MISIÓN</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="mission">
+                <strong>Elevar el rendimiento</strong> de las atletas y convertirlo en <strong>excelencia competitiva</strong> mediante un enfoque integrado que combina técnica avanzada, preparación mental y una cultura de juego orientada al resultado, <strong>colaborando plenamente con el cuerpo técnico</strong> para asegurar coherencia, continuidad y crecimiento colectivo.
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header">
+                <span class="section-number">02</span>
+                <h2>DESAFÍOS ACTUALES</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item current">
+                    <div class="timeline-year">2026</div>
+                    <div class="timeline-title">Italposa Forlì Softball Serie A</div>
+                    <div class="timeline-role">Coach</div>
+                </div>
+                <div class="timeline-item current">
+                    <div class="timeline-year">2026</div>
+                    <div class="timeline-title">Selección Nacional Italiana de Softball U22</div>
+                    <div class="timeline-role">Coach</div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header">
+                <span class="section-number">03</span>
+                <h2>TRAYECTORIA Y RESULTADOS</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="results-layout">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-year">2025</div>
+                        <div class="timeline-title">Italposa Forlì</div>
+                        <div class="timeline-role">Coach</div>
+                        <div class="timeline-achievements">
+                            <span class="achievement gold">Campeón Copa Italia - Serie A</span>
+                            <span class="achievement silver">Sub-Campeón Nacional Serie A</span>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2024</div>
+                        <div class="timeline-title">Blue Girls Pianoro</div>
+                        <div class="timeline-role">Manager - Coach</div>
+                        <div class="timeline-achievements">
+                            <span class="achievement gold">Campeón Nacional U18</span>
+                            <span class="achievement semifinal">Semifinalista Serie A</span>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2023</div>
+                        <div class="timeline-title">Blue Girls Pianoro</div>
+                        <div class="timeline-role">Manager</div>
+                        <div class="timeline-achievements">
+                            <span class="achievement silver">Sub-Campeón Nacional U18</span>
+                            <span class="achievement bronze">Tercer Lugar Nacional U13</span>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2021 – 2022</div>
+                        <div class="timeline-title">Pasos Fundamentales</div>
+                        <div class="timeline-role">Entrenador de Desarrollo</div>
+                        <div class="timeline-achievements">
+                            <span class="achievement">Blue Girls Pianoro U13–U18</span>
+                            <span class="achievement">Athletics Bologna Baseball Serie A</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="trophy-highlight">
+                    <img src="WhatsApp_Image_2025-11-30_at_13_43_14.jpeg" alt="Pablo Suarez - Copa Italia Champion 2025" />
+                    <div class="trophy-caption">
+                        <span class="trophy-year">2025</span>
+                        <span class="trophy-title">Campeón Copa Italia</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header">
+                <span class="section-number">04</span>
+                <h2>COMPETENCIAS CLAVE</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">🌱</div>
+                    <h3>Desarrollo Juvenil</h3>
+                    <ul>
+                        <li>Enfoque integrado: técnica, mentalidad y cultura deportiva</li>
+                        <li>Desarrollo técnico adaptado a diferentes etapas formativas</li>
+                        <li>Construcción de atletas y equipos resilientes con visión a largo plazo</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">⚡</div>
+                    <h3>Técnica y Estrategia</h3>
+                    <ul>
+                        <li>Experiencia combinada en Béisbol y Softball</li>
+                        <li>Visión táctica adaptada al contexto europeo</li>
+                        <li>Liderazgo en campo mediante coaching motivacional y adaptativo</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🤝</div>
+                    <h3>Habilidades Interpersonales</h3>
+                    <ul>
+                        <li>Comunicación fluida en italiano, español e inglés</li>
+                        <li>Adaptabilidad cultural y mentalidad de trabajo en equipo</li>
+                        <li>Compromiso con el desarrollo deportivo y la cultura competitiva</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header">
+                <span class="section-number">05</span>
+                <h2>IDIOMAS</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="languages">
+                <div class="language">
+                    <div class="language-flag">🇮🇹</div>
+                    <div class="language-name">ITALIANO</div>
+                    <div class="language-level">Fluido</div>
+                </div>
+                <div class="language">
+                    <div class="language-flag">🇪🇸</div>
+                    <div class="language-name">ESPAÑOL</div>
+                    <div class="language-level">Nativo</div>
+                </div>
+                <div class="language">
+                    <div class="language-flag">🇬🇧</div>
+                    <div class="language-name">INGLÉS</div>
+                    <div class="language-level">Fluido</div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header">
+                <span class="section-number">06</span>
+                <h2>FORMACIÓN</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="skills-grid" style="grid-template-columns: repeat(2, 1fr);">
+                <div class="skill-card">
+                    <div class="skill-icon">🎓</div>
+                    <h3>Educación Formal</h3>
+                    <ul>
+                        <li>Diploma de Bachillerato | Ciencias Humanas</li>
+                        <li>Universidad | Comunicación y Marketing</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">⚾</div>
+                    <h3>Trayectoria Deportiva</h3>
+                    <ul>
+                        <li>Ex jugador de béisbol en Venezuela e Italia</li>
+                        <li>Transición estratégica al softball en 2017</li>
+                        <li>Formación continua basada en práctica, estudio y análisis</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header">
+                <span class="section-number">07</span>
+                <h2>REFERENCIAS</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="references-grid">
+                <div class="reference-card">
+                    <div class="reference-avatar">DH</div>
+                    <div class="reference-name">Donny Hale</div>
+                    <div class="reference-role">Manager Softball Club Forlì<br>Manager Selección Nacional de Nueva Zelanda</div>
+                    <div class="reference-contact">+64 22 020 1246</div>
+                </div>
+                <div class="reference-card">
+                    <div class="reference-avatar">DF</div>
+                    <div class="reference-name">Daniele Frignani</div>
+                    <div class="reference-role">GM Fortitudo Baseball</div>
+                    <div class="reference-contact">+39 338 836 4912</div>
+                </div>
+                <div class="reference-card">
+                    <div class="reference-avatar">GB</div>
+                    <div class="reference-name">Giovanni Bombacci</div>
+                    <div class="reference-role">Presidente Softball Club Forlì</div>
+                    <div class="reference-contact">+39 348 272 7440</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-location">Pianoro (BO), Italia</div>
+        <div class="footer-cta">¿LISTO PARA ELEVAR TU EQUIPO?</div>
+        <div class="footer-email">
+            <a href="/cdn-cgi/l/email-protection#205041424c4f605041424c4f53554152455a0e4d45">CONTACTAR</a>
+        </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity
