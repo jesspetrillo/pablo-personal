@@ -936,7 +936,7 @@
         <div class="footer-location">Pianoro (BO), Italia</div>
         <div class="footer-cta">¿LISTO PARA ELEVAR TU EQUIPO? HABLEMOS</div>
         <div class="footer-email">
-            <a href="mailto:pablo@pablosuarez.me" id="emailLink" onclick="copyEmail(event); return false;">pablo@pablosuarez.me</a>
+            <a href="mailto:pablo@pablosuarez.me" id="emailLink">pablo@pablosuarez.me</a>
             <a href="https://www.instagram.com/pablosuarezsenior">INSTAGRAM</a>
             <a href="https://pablosuarez.me/contact.html">Descarga mi CV</a>
         </div>
@@ -944,8 +944,10 @@
 
     <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Copy email to clipboard
-        function copyEmail(event) {
+        document.getElementById('emailLink').addEventListener('click', function(event) {
             event.preventDefault();
+            event.stopPropagation();
+
             const email = 'pablo@pablosuarez.me';
             navigator.clipboard.writeText(email).then(() => {
                 const link = event.target;
@@ -960,7 +962,9 @@
                 // Fallback: open mailto if copy fails
                 window.location.href = 'mailto:' + email;
             });
-        }
+
+            return false;
+        });
 
         // Intersection Observer for scroll animations
         const observerOptions = {
